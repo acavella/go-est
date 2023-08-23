@@ -25,11 +25,11 @@ func main() {
 	fmt.Println("renew:", *renewPtr)
 	fmt.Println("trust:", *trustPtr)
 
-	if *enrollPtr == true {
+	if *enrollPtr {
 		fmt.Println("Starting EST Simple Enroll.")
-	} else if *renewPtr == true {
+	} else if *renewPtr {
 		fmt.Println("Starting EST Simple Reenroll.")
-	} else if *trustPtr == true {
+	} else if *trustPtr {
 		fmt.Println("Getting CA trust.")
 		tr := &http.Transport{
 			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
