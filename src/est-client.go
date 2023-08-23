@@ -48,7 +48,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Printf("%s\n", bodyText)
+		fmt.Printf("-----BEGIN P7B-----\n%s\n-----END P7B-----\n", bodyText)
 	}
 
 }
