@@ -1,7 +1,4 @@
-# GO-EST
-![image](https://github.com/acavella/go-est/blob/b011511623f79e697367088a17b517ee5d82ba3b/docs/Go-EST_Blue.png)
-
-## Description
+# GO-EST ![image](https://github.com/acavella/go-est/blob/b011511623f79e697367088a17b517ee5d82ba3b/docs/Go-EST_Blue.png)
 A RFC 7030 compliant EST client written in Go.
 
 ## Requirements
