@@ -48,8 +48,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		trustP7 := fmt.Sprintf("-----BEGIN P7B-----\n%d\n-----END P7B-----\n", bodyText)
+		trustP7 := fmt.Sprintf("-----BEGIN P7B-----\n%s\n-----END P7B-----\n", bodyText)
 		fmt.Println(trustP7)
 	}
-
 }
