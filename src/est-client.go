@@ -7,6 +7,8 @@ import (
 	"io"
 	"log"
 	"net/http"
+
+	"github.com/spf13/viper"
 )
 
 func main() {
@@ -25,6 +27,9 @@ func main() {
 	fmt.Println("renew:", *renewPtr)
 	fmt.Println("trust:", *trustPtr)
 
+	viper.SetConfigFile("config.env")
+	viper.ReadInConfig()
+
 	if *enrollPtr {
 		fmt.Println("Starting EST Simple Enroll.")
 	} else if *renewPtr {
@@ -35,7 +40,7 @@ func main() {
 			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 		}
 		client := &http.Client{Transport: tr}
-		req, err := http.NewRequest("GET", "https://postman-echo.com/get", nil)
+		req, err := http.NewRequest("GET", viper.GetString("CAURL"), nil)
 		if err != nil {
 			log.Fatal(err)
 		}
