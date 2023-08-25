@@ -21,3 +21,6 @@ bin/
 
 # Go workspace file
 go.work
+
+# Exclude configuration environment files
+*.env
