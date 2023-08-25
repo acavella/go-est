@@ -11,6 +11,33 @@ import (
 	"github.com/spf13/viper"
 )
 
+func gettrust() {
+
+	viper.SetConfigFile("config.env")
+	viper.ReadInConfig()
+
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	client := &http.Client{Transport: tr}
+	req, err := http.NewRequest("GET", viper.GetString("CAURL"), nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+	bodyText, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	trustP7 := fmt.Sprintf("-----BEGIN P7B-----\n%s\n-----END P7B-----\n", bodyText)
+
+	fmt.Println(trustP7)
+}
+
 func main() {
 
 	p12path := flag.String("path", "", "Path to client P12")
@@ -21,39 +48,20 @@ func main() {
 
 	flag.Parse()
 
+	fmt.Println("---Begin Flag Validation---")
 	fmt.Println("path:", *p12path)
 	fmt.Println("p12pass:", *p12pass)
 	fmt.Println("enroll:", *enrollPtr)
 	fmt.Println("renew:", *renewPtr)
 	fmt.Println("trust:", *trustPtr)
-
-	viper.SetConfigFile("config.env")
-	viper.ReadInConfig()
+	fmt.Println("---End Flag Validation---")
 
 	if *enrollPtr {
 		fmt.Println("Starting EST Simple Enroll.")
 	} else if *renewPtr {
 		fmt.Println("Starting EST Simple Reenroll.")
 	} else if *trustPtr {
-		fmt.Println("Getting CA trust.")
-		tr := &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-		}
-		client := &http.Client{Transport: tr}
-		req, err := http.NewRequest("GET", viper.GetString("CAURL"), nil)
-		if err != nil {
-			log.Fatal(err)
-		}
-		resp, err := client.Do(req)
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer resp.Body.Close()
-		bodyText, err := io.ReadAll(resp.Body)
-		if err != nil {
-			log.Fatal(err)
-		}
-		trustP7 := fmt.Sprintf("-----BEGIN P7B-----\n%s\n-----END P7B-----\n", bodyText)
-		fmt.Println(trustP7)
+		log.Println("Retrieving Certificate Authority trust.")
+		gettrust()
 	}
 }
