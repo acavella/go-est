@@ -8,9 +8,10 @@
 ___
 A RFC 7030 compliant EST client written in Go.
 
-## Requirements
-- 
-- 
+## References
+- [RFC 7030](https://datatracker.ietf.org/doc/html/rfc7030)
+- [RFC 8295](https://datatracker.ietf.org/doc/html/rfc8295)
+- ISC CertAgent 7.0.9.x Administration Guide
 
 ## Installation
 - Step 1
