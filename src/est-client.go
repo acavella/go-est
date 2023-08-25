@@ -38,6 +38,10 @@ func gettrust() {
 	fmt.Println(trustP7)
 }
 
+func renew() {
+
+}
+
 func main() {
 
 	p12path := flag.String("path", "", "Path to client P12")
