@@ -57,11 +57,11 @@ func main() {
 	fmt.Println("---End Flag Validation---")
 
 	if *enrollPtr {
-		fmt.Println("Starting EST Simple Enroll.")
+		log.Println("Initiating EST Simple Enroll.")
 	} else if *renewPtr {
-		fmt.Println("Starting EST Simple Reenroll.")
+		log.Println("Initiating EST Simple Reenrollment.")
 	} else if *trustPtr {
 		log.Println("Retrieving Certificate Authority trust.")
-		gettrust()
+		gettrust() // runs trust function
 	}
 }
