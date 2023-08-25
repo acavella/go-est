@@ -2,6 +2,7 @@
 
 ![GitHub go.mod Go version (branch & subdirectory of monorepo)](https://img.shields.io/github/go-mod/go-version/acavella/go-est/main)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/acavella/go-est/main)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/acavella/go-est/go.yml)
 
 
 ___
