@@ -17,9 +17,6 @@ var (
 	enrollPtr = flag.Bool("enroll", false, "Bool to enroll")
 	renewPtr  = flag.Bool("renew", false, "Bool to renew")
 	trustPtr  = flag.Bool("trust", false, "Bool to retrieve trust")
-	certFile  = flag.String("cert", "someCertFile", "A PEM eoncoded certificate file.")
-	keyFile   = flag.String("key", "someKeyFile", "A PEM encoded private key file.")
-	caFile    = flag.String("CA", "someCertCAFile", "A PEM eoncoded CA's certificate file.")
 )
 
 func gettrust() {
@@ -31,7 +28,7 @@ func gettrust() {
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 	}
 	client := &http.Client{Transport: tr}
-	req, err := http.NewRequest("GET", viper.GetString("CAURL"), nil)
+	req, err := http.NewRequest("GET", viper.GetString("ESTURL"), nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -110,7 +107,7 @@ func main() {
 		log.Println("Initiating EST Simple Enroll.")
 	} else if *renewPtr {
 		log.Println("Initiating EST Simple Reenrollment.")
-		renew()
+		/*renew()*/
 	} else if *trustPtr {
 		log.Println("Retrieving Certificate Authority trust.")
 		gettrust() // runs trust function
